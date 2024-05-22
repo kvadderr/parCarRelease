@@ -1,12 +1,14 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
-import InfoCar from "./components/InfoCar";
+import InfoCar from "./components/info-car/InfoCar";
+import DetailInfoCar from "./components/detail-info-car";
 
 const Reserve = () => {
+  const [fullInfo, setFullInfo] = useState<boolean>(false);
   const bottomSheetRef = useRef<BottomSheet>(null);
   const handleSheetChanges = useCallback((index: number) => {
-    console.log("handleSheetChanges", index);
+    setFullInfo(index === 1);
   }, []);
 
   return (
@@ -14,16 +16,19 @@ const Reserve = () => {
       <BottomSheet
         ref={bottomSheetRef}
         onChange={handleSheetChanges}
-        enableDynamicSizing={true}
+        // enableDynamicSizing={true}
         animateOnMount={true}
-        // snapPoints={[240, "90%"]}
+        snapPoints={["28", "82"]}
       >
         <BottomSheetView style={styles.contentContainer}>
-          <InfoCar
-            time="22:31"
-            title="Tesla Model X"
-            numberCar="V 932 RC 198"
-          />
+          {!fullInfo && (
+            <InfoCar
+              time="22:31"
+              title="Tesla Model X"
+              numberCar="V 932 RC 198"
+            />
+          )}
+          {fullInfo && <DetailInfoCar />}
         </BottomSheetView>
       </BottomSheet>
     </View>
