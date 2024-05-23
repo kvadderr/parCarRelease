@@ -1,19 +1,34 @@
-import {useCallback, useRef} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import BottomSheet, {BottomSheetView} from '@gorhom/bottom-sheet';
+import { useCallback, useRef, useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
+import InfoCar from "./components/info-car/InfoCar";
+import DetailInfoCar from "./components/detail-info-car";
 
 const Reserve = () => {
+  const [fullInfo, setFullInfo] = useState<boolean>(false);
   const bottomSheetRef = useRef<BottomSheet>(null);
   const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
+    setFullInfo(index === 1);
   }, []);
 
   return (
-    <View style={{flex: 1}}>
-      <View style={{flex: 1, backgroundColor: 'red'}} />
-      <BottomSheet ref={bottomSheetRef} onChange={handleSheetChanges}>
+    <View style={{ flex: 1 }}>
+      <BottomSheet
+        ref={bottomSheetRef}
+        onChange={handleSheetChanges}
+        // enableDynamicSizing={true}
+        animateOnMount={true}
+        snapPoints={["28", "82"]}
+      >
         <BottomSheetView style={styles.contentContainer}>
-          <Text>Awesome 🎉</Text>
+          {!fullInfo && (
+            <InfoCar
+              time="22:31"
+              title="Tesla Model X"
+              numberCar="V 932 RC 198"
+            />
+          )}
+          {fullInfo && <DetailInfoCar />}
         </BottomSheetView>
       </BottomSheet>
     </View>
@@ -23,13 +38,11 @@ const Reserve = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
-    backgroundColor: 'grey',
   },
   contentContainer: {
-    flex: 1,
-    alignItems: 'center',
-  }
+    paddingHorizontal: 16,
+    paddingBottom: 20,
+  },
 });
 
 export default Reserve;
