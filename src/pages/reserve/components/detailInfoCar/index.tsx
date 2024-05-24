@@ -2,6 +2,7 @@ import {
   Image,
   ImageBackground,
   Pressable,
+  ScrollView,
   StyleSheet,
   Text,
   View,
@@ -13,12 +14,15 @@ import { MainButton } from "../../../../shared/components/buttons";
 import { lightning } from "../../../../shared/assets/icons/basic";
 import { car } from "../../../../shared/assets/img";
 import LightIcon from "../../../../shared/assets/icons/basic/lightIcon";
-import VolumeIcon from "../../../../shared/assets/icons/basic/volumeIcon";
+import VolumeIcon from "../../../../shared/assets/icons/basic/VolumeIcon";
+import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
+import Characteristics from "../characteristics/characteristics";
+import DownloadDocs from "../downloadDocs";
 
 function DetailInfoCar() {
   return (
     <>
-      <View>
+      <View style={styles.wrapInfo}>
         <Text style={styles.title}>Tesla Model X</Text>
         <View style={styles.totalInfo}>
           <View style={[styles.grayBlock, styles.speed]}>
@@ -51,10 +55,8 @@ function DetailInfoCar() {
           </View>
         </View>
       </View>
-      <View style={styles.buttomPanel}>
-        <MainButton label="Начать осмотр авто" onClick={() => {}} />
-        <TextButton label="Отменить бронь" onClick={() => {}} />
-      </View>
+      <Characteristics />
+      <DownloadDocs />
     </>
   );
 }
@@ -62,6 +64,13 @@ function DetailInfoCar() {
 export default DetailInfoCar;
 
 const styles = StyleSheet.create({
+  wrapInfo: {
+    backgroundColor: "#ffffff",
+    paddingHorizontal: 16,
+    borderBottomRightRadius: 16,
+    borderBottomLeftRadius: 16,
+  },
+
   title: {
     marginBottom: 16,
     fontFamily: "Inter",

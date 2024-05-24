@@ -1,16 +1,9 @@
 import * as React from "react";
 import Svg, { Path } from "react-native-svg";
 
-function VolumeIcon(props) {
+function VolumeIcon() {
   return (
-    <Svg
-      width={21}
-      height={20}
-      viewBox="0 0 21 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <Svg width={21} height={20} viewBox="0 0 21 20" fill="none">
       <Path
         d="M12.166 12.345v-4.69c0-2.62 0-3.931-.771-4.257-.771-.326-1.679.6-3.494 2.454-.94.96-1.476 1.172-2.813 1.172-1.17 0-1.755 0-2.175.287-.872.595-.74 1.758-.74 2.69 0 .93-.132 2.094.74 2.689.42.286 1.005.286 2.175.286 1.337 0 1.873.213 2.813 1.173 1.815 1.853 2.723 2.78 3.494 2.453.771-.326.771-1.636.771-4.257z"
         fill="#98A2B3"
